@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+Route::get('/', 'UserPageController@index')->name('welcome');
 Route::post('/', 'UserPageController@store')->name('store');
+Route::post('/livestore', 'UserPageController@livestore')->name('livestore');
