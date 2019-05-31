@@ -1,4 +1,4 @@
-<table class="table table-sm table-bordered">
+<table id="recordsTable" class="table table-sm table-bordered">
     <thead class="bg-info text-white">
     <tr>
         <td>Action</td>
@@ -12,7 +12,14 @@
     @foreach($personal as $value)
         <tbody>
         <tr>
-            <td><button class="btn btn-sm btn-outline-warning">edit</button> <button class="btn btn-sm btn-outline-danger">delete</button></td>
+            <td><button class="btn btn-sm btn-outline-warning"
+                        data-id="{{$value->id}}"
+                        data-firstname="{{$value->firstname}}"
+                        data-lastname="{{$value->lastname}}"
+                        data-birthdate="{{$value->birthdate}}"
+                        data-status="{{$value->status}}"
+                        onclick="editRecord(this);">edit</button>
+                <button class="btn btn-sm btn-outline-danger" id="{{$value->id}}" onclick="deleteRecord(this);">delete</button></td>
             <td>@if ($value->status == 'Disabled'){{$value->firstname}}
                 @else <input class="form-control-sm col" type="text" id="{{$value->id}}" data-name="firstname" value="{{$value->firstname}}" onkeyup="liveInsert(this);"> @endif</td>
             <td>@if ($value->status == 'Disabled'){{$value->lastname}}
@@ -36,3 +43,4 @@
         </tbody>
     @endforeach
 </table>
+{!! $personal->links() !!}
