@@ -16,19 +16,25 @@ class UserPageController extends Controller
 
     function fetch_data(Request $request)
     {
-        if($request->ajax())
-        {
-            $firstName = $request->input('firstname');
-            if(!$firstName){
-                $personal = personal::latest()->paginate(5);
-                return view('recordsTable', compact('personal'))->render();
-            }else{
-                $personal = personal::Where('firstname', 'like', '%' . $firstName . '%')->latest()->paginate(5);
-                //dd($personal);
-                return view('recordsTable', compact('personal'))->render();
-            }
 
+        $firstName = $request->input('firstname');
+        $lastName = $request->input('lastname');
+
+
+        $personal = personal::query();
+
+        if (!empty($firstName)) {
+            $personal = $personal->where('firstname', 'like', '%'.$firstName.'%');
         }
+        if (!empty($lastName)) {
+            $personal = $personal->where('lastname', 'like', '%'.$lastName.'%');
+        }
+
+        $personal = $personal->paginate(5);
+
+        return view('recordsTable', compact('personal'))->render();
+
+
     }
 
     function search(Request $request)
