@@ -53,16 +53,8 @@ class UserPageController extends Controller
         }
 
         $personal = $personal->paginate(5);
-        //$personal = personal::Where('firstname', 'like', '%' . $firstName . '%')->paginate(5);
-        //dd($personal);
-        return view('recordsTable', compact('personal'))->render();
 
-      /*  firlds = ['firstname', 'lastname'];
-        foreach ($firlds as $field){
-            if(!empty($request->$field)){
-                $personal = personal::Where($field, '=', $request->$field)->latest()->paginate(5);
-            }
-        }*/
+        return view('recordsTable', compact('personal'))->render();
 
 
     }
@@ -129,7 +121,7 @@ class UserPageController extends Controller
             $liveRecord->$name = $input;
             $liveRecord->save();
 
-            $personal = personal::get();
+            $personal = personal::latest()->paginate(5);
             $html = view('recordsTable')->with(compact('personal'))
                 ->render();
 
