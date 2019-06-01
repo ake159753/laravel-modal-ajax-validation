@@ -1,4 +1,4 @@
-# laravel-modal-ajax-validation
+# laravel table with pagination an ajax validation without page refresh
 
 ![1](https://user-images.githubusercontent.com/50162696/58745132-fcd2a900-845d-11e9-9bc8-157fe9669fca.jpg)
 
